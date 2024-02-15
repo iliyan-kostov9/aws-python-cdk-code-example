@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import os
-
 import aws_cdk as cdk
 
 from aws_python_cdk_code_example.aws_python_cdk_code_example_stack import (
