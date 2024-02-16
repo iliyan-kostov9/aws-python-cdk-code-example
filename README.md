@@ -183,7 +183,13 @@ arn:aws:cloudformation:REGION:ACCOUNT-NUMBER:...
 
 Congrats, you now know how to use CDK !
 
-Have fun :)
+### Cleaning up
+
+Now we can easily destory our newly created CloudFormation stack simply by running:
+
+```bash
+cdk destroy S3Sample
+```
 
 ## Contribute
 

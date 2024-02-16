@@ -1,29 +1,19 @@
 #!/usr/bin/env python3
 import aws_cdk as cdk
 
-from aws_python_cdk_code_example.aws_python_cdk_code_example_stack import (
-    AwsPythonCdkCodeExampleStack,
-)
+
+from src.models.config import AccountConfigStack
 from stacks.S3Sample import S3Sample
 
-
 app = cdk.App()
-AwsPythonCdkCodeExampleStack(
-    app,
-    "AwsPythonCdkCodeExampleStack",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
-    # env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-    # Uncomment the next line if you know exactly what Account and Region you
-    # want to deploy the stack to. */
-    # env=cdk.Environment(account='123456789012', region='us-east-1'),
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-)
 
-S3Sample(app, "S3Sample")
+aws_account = AccountConfigStack(environment="development").aws_account
+
+S3Sample(
+    app,
+    "S3Sample",
+    env=cdk.Environment(account=aws_account.account_id, region=aws_account.region),
+)
 
 
 app.synth()
