@@ -3,15 +3,17 @@ import aws_cdk as cdk
 
 
 from src.models.config import AccountConfigStack
-from stacks.S3Sample import S3Sample
+from stacks.S3SampleStack import S3SampleStack
 
 app = cdk.App()
 
-aws_account = AccountConfigStack(environment="development").aws_account
+environment: str = "development"
 
-S3Sample(
+aws_account = AccountConfigStack(environment=environment).aws_account
+
+S3SampleStack(
     app,
-    "S3Sample",
+    f"{environment}-S3SampleStack",
     env=cdk.Environment(account=aws_account.account_id, region=aws_account.region),
 )
 
