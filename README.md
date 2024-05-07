@@ -14,7 +14,7 @@ However in this example we'll be mainly using Python for that matter.
 
 ## Getting Started
 
-Before going to the fun stuff of writing code, we'll need to make sure we have the neccessary dependencies on our local machine, in order for us to fully integrate CDK into our infrastructure.
+Before going to the fun stuff of writing code, we'll need to make sure we have the necessary dependencies on our local machine, in order for us to fully integrate CDK into our infrastructure.
 
 1. Dependencies
 
@@ -31,7 +31,7 @@ Before going to the fun stuff of writing code, we'll need to make sure we have t
 In order for us to deploy any resources to our AWS profile, our local machine needs to authenticate and authorize to AWS. There are 2 approaches to tackle that:
 
 1. AWS SSO
-Prerequisite: your accout needs to have IAM Identity Center enabled
+Prerequisite: your account needs to have IAM Identity Center enabled
 
 2. Creating a new user for programmatic access
 Prerequisite: you need to have `iam:CreateUser` permission in your account, if you simply only have root (admin) account, then you have more than enough  access to satisfy this requirement
@@ -44,9 +44,9 @@ Open a terminal and type:
 aws configure sso
 ```
 
-Follow the command propmts - at the very end the CLI would ask you to authorize the AWS connection by opening a window browser, please verify this part also.
+Follow the command prompts - at the very end the CLI would ask you to authorize the AWS connection by opening a window browser, please verify this part also.
 
-Once you have installed the dependneices, listed above, open a terminal window and type the following command:
+Once you have installed the dependencies, listed above, open a terminal window and type the following command:
 
 ### Creating a new user for programmatic access
 
@@ -70,7 +70,7 @@ Verify the installation by running:
 cdk --version
 ```
 
-If the output looks something like `2.X.X (build d111111)`, then the installation was successfull.
+If the output looks something like `2.X.X (build d111111)`, then the installation was successful.
 
 Next you'd need to verify if you have an active session with your AWS profile by running:
 
@@ -90,20 +90,22 @@ mkdir cdk-python
 
 **Note**: the name of the root directory (in this case cdk-python) would actually inherit the same name as the Cloudformation template when you get at the deploy stage
 
-Now initalize a CDK app by running:
+Now initialize a CDK app by running:
 
 ```bash
 cdk init app --language python
 ```
 
-In the `cdk init` command it fortunatelly created for us a  virtual environment for us to use it. Let's activate it and install the neeeded dependencies, listed in the `requirements.txt` file!:
+In the `cdk init` command it fortunately created for us a  virtual environment for us to use it. Let's activate it and install the needed dependencies, listed in the `requirements.txt` file!:
 
 ```bash
 source .venv/bin/activate
+pip install --upgrade pip && pip install pip-tools
+pip-compile --output-file=requirements.txt requirements.in
 python -m pip install -r requirements.txt
 ```
 
-To verify that the CDK is able to recognize the defaultly created stack, run:
+To verify that the CDK is able to recognize the default created stack, run:
 
 ```bash
 cdk ls
@@ -111,7 +113,7 @@ cdk ls
 
 If you see an output of the name of your directory like in my example being: `AwsPythonCdkCodeExampleStack`, then you can proceed to the next step!
 
-Now let's add another stack, that esentially creates us a simple S3 bucket. create a new directory `stacks` and let's name it `S3.Sample.py`
+Now let's add another stack, that essentially creates us a simple S3 bucket. create a new directory `stacks` and let's name it `S3.Sample.py`
 
 ```bash
 mkdir stacks
@@ -135,7 +137,7 @@ class S3Sample(cdk.Stack):
 ```
 
 You can add this stack to that `app.py` file for the cdk to fetch the stack and deploy it to your AWS environment.
-Put this following code snippt at the `app.py` file, right after the `AwsPythonCdkCodeExampleStack` stack definition:
+Put this following code snippet at the `app.py` file, right after the `AwsPythonCdkCodeExampleStack` stack definition:
 
 ```python
 
@@ -145,7 +147,7 @@ S3Sample(app, "S3Sample")
 app.synth()
 ```
 
-alright now let's synthetize our AWS Cloudformation template by running:
+alright now let's synthesize our AWS Cloudformation template by running:
 
 **Note**: Ensure that in the terminal you are located on the root of the project, since the CDK Toolkit (e.g CLI) will try to fetch all of the configuration files in that directory structure order.
 
@@ -185,7 +187,7 @@ Congrats, you now know how to use CDK !
 
 ### Cleaning up
 
-Now we can easily destory our newly created CloudFormation stack simply by running:
+Now we can easily destroy our newly created CloudFormation stack simply by running:
 
 ```bash
 cdk destroy S3Sample
