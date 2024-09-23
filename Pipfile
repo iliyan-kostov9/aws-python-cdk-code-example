@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aws-cdk-lib = "==2.128.0"
+aws-cdk-lib = "==2.159.1"
 constructs = "<11.0.0,>=10.0.0"
 
 [dev-packages]
